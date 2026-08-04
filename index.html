@@ -22,6 +22,48 @@
 .reportbar{display:flex;justify-content:space-between;align-items:center;margin:28px 0 14px}.reportbar h2{margin:0}.footer{padding:26px 0 40px;color:var(--muted);font-size:12px;display:flex;justify-content:space-between}
 @media(max-width:900px){.hero{grid-template-columns:1fr}.wizard{grid-template-columns:1fr}.steps{position:static;display:flex;overflow:auto}.stepnav{min-width:170px}.cards{grid-template-columns:1fr 1fr}.live{grid-template-columns:1fr 1fr}.detailgrid{grid-template-columns:1fr}}
 @media(max-width:750px){.scale{grid-template-columns:1fr 1fr}.allocation{grid-template-columns:1fr}.allocation-ring{margin:auto}}@media(max-width:600px){.wrap{padding:0 16px}.top{height:62px}.hero{padding-top:42px}.hero h1{font-size:43px}.grid{grid-template-columns:1fr}.panel{padding:22px 17px}.steps{display:none}.live,.cards{grid-template-columns:1fr}.live div{border-right:0;border-bottom:1px solid rgba(255,255,255,.12)}.scorebox{grid-template-columns:1fr}.reportbar{display:block}.reportbar .btn{width:100%;margin-top:12px}.footer{display:block}.footer span{display:block;margin-top:5px}}
+
+.field-hidden{display:none!important}
+.formgrid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:22px 20px;
+  align-items:start
+}
+.field{
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+  height:100%
+}
+.labelrow{
+  min-height:24px;
+  align-items:flex-start
+}
+.control{
+  min-height:54px;
+  width:100%
+}
+.control input,.control select{
+  width:100%;
+  min-width:0;
+  height:52px
+}
+.standard-note{
+  min-height:36px;
+  display:flex;
+  align-items:flex-start
+}
+.income-preview{
+  min-height:58px;
+  width:100%
+}
+@media(max-width:760px){
+  .formgrid{grid-template-columns:1fr;gap:18px}
+  .field,.control,.income-preview{width:100%}
+  .standard-note{min-height:0}
+}
+
 </style>
 </head>
 <body>
@@ -38,11 +80,11 @@
 <section class="panel step" data-step="1"><h3>Vilka köper bostaden?</h3><p>Vi använder lönen för att uppskatta inkomsten efter skatt.</p><div class="grid">
 <div class="field"><div class="labelrow"><label for="municipality">Var bor du?</label><button type="button" class="infobtn" aria-label="Varför kommunen behövs" data-tip="Kommunen påverkar kommun- och regionskatten och därmed nettolönen. Kalkylen använder 2026 års skattesatser. Skatten styrs normalt av var du var folkbokförd den 1 november året före inkomståret.">i</button></div><div class="control"><input id="municipality" type="text" placeholder="T.ex. Bromma, Enskededalen eller Malmö" list="municipalityList" autocomplete="off"></div><datalist id="municipalityList"><option value="Borlänge"></option><option value="Borås"></option><option value="Botkyrka"></option><option value="Danderyd"></option><option value="Ekerö"></option><option value="Eskilstuna"></option><option value="Falun"></option><option value="Gotland"></option><option value="Gävle"></option><option value="Göteborg"></option><option value="Halmstad"></option><option value="Haninge"></option><option value="Helsingborg"></option><option value="Huddinge"></option><option value="Järfälla"></option><option value="Jönköping"></option><option value="Kalmar"></option><option value="Karlskrona"></option><option value="Karlstad"></option><option value="Kristianstad"></option><option value="Kungsbacka"></option><option value="Kungälv"></option><option value="Landskrona"></option><option value="Lerum"></option><option value="Lidingö"></option><option value="Linköping"></option><option value="Luleå"></option><option value="Lund"></option><option value="Malmö"></option><option value="Mölndal"></option><option value="Nacka"></option><option value="Norrköping"></option><option value="Norrtälje"></option><option value="Nykvarn"></option><option value="Nynäshamn"></option><option value="Partille"></option><option value="Salem"></option><option value="Sigtuna"></option><option value="Skellefteå"></option><option value="Sollentuna"></option><option value="Solna"></option><option value="Stockholm"></option><option value="Sundbyberg"></option><option value="Sundsvall"></option><option value="Södertälje"></option><option value="Trelleborg"></option><option value="Tyresö"></option><option value="Täby"></option><option value="Umeå"></option><option value="Upplands Väsby"></option><option value="Uppsala"></option><option value="Vallentuna"></option><option value="Varberg"></option><option value="Värmdö"></option><option value="Västerås"></option><option value="Växjö"></option><option value="Ystad"></option><option value="Ängelholm"></option><option value="Örebro"></option><option value="Östersund"></option><option value="Österåker"></option></datalist><div id="taxRateNote" class="tax-note"></div></div>
 <div class="field"><div class="labelrow"><label for="church1">Medlem i Svenska kyrkan?</label><button type="button" class="infobtn" aria-label="Förklaring av kyrkoavgift" data-tip="Medlemmar betalar kyrkoavgift. Avgiften varierar mellan församlingar. Kalkylen använder 2026 års riksgenomsnitt på 1,05 procent. Begravningsavgift ingår även för den som inte är medlem.">i</button></div><div class="control"><select id="church1"><option value="no" selected>Nej</option><option value="yes">Ja</option></select></div></div>
-<div class="field"><div class="labelrow"><label for="salary1">Din lön före skatt</label><button type="button" class="infobtn" aria-label="Förklaring av din lön före skatt" data-tip="Din vanliga månadslön innan skatt. Ta med fast lön, men inte osäker bonus eller övertid.">i</button></div><div class="control"><input id="salary1" type="number" placeholder="35000"><span class="unit">kr</span></div></div>
+<div class="field"><div class="labelrow"><label for="salary1">Din lön före skatt <span class="req">*</span></label><button type="button" class="infobtn" aria-label="Förklaring av din lön före skatt" data-tip="Din vanliga månadslön innan skatt. Ta med fast lön, men inte osäker bonus eller övertid.">i</button></div><div class="control"><input id="salary1" type="number" placeholder="35000" required><span class="unit">kr</span></div></div>
 <div id="netPreview1" class="income-preview"><span>Beräknad nettolön person 1</span><strong>–</strong></div>
 
 <div class="field"><div class="labelrow"><label for="co">Köper du med någon?</label><button type="button" class="infobtn" aria-label="Förklaring av medsökande" data-tip="Välj Ja om en partner eller annan person ska stå med på lånet och köpa bostaden tillsammans med dig.">i</button></div><div class="control"><select id="co"><option value="yes">Ja</option><option value="no" selected>Nej</option></select></div></div>
-<div class="field" id="salary2Field"><div class="labelrow"><label for="salary2">Den andra personens lön</label><button type="button" class="infobtn" aria-label="Förklaring av den andra personens lön" data-tip="Medsökandens vanliga månadslön innan skatt.">i</button></div><div class="control"><input id="salary2" type="number" placeholder="32000"><span class="unit">kr</span></div>
+<div class="field field-hidden" id="salary2Field" aria-hidden="true"><div class="labelrow"><label for="salary2">Den andra personens lön</label><button type="button" class="infobtn" aria-label="Förklaring av den andra personens lön" data-tip="Medsökandens vanliga månadslön innan skatt.">i</button></div><div class="control"><input id="salary2" type="number" placeholder="35000"><span class="unit">kr</span></div>
 <div class="labelrow" style="margin-top:12px"><label for="church2">Medsökande medlem i Svenska kyrkan?</label><button type="button" class="infobtn" aria-label="Förklaring av kyrkoavgift för medsökande" data-tip="Kyrkoavgiften beräknas separat och använder 2026 års riksgenomsnitt på 1,05 procent.">i</button></div><div class="control"><select id="church2"><option value="no" selected>Nej</option><option value="yes">Ja</option></select></div>
 <div id="netPreview2" class="income-preview" style="margin-top:12px"><span>Beräknad nettolön medsökande</span><strong>–</strong></div></div>
 <div class="field"><div class="labelrow"><label for="children">Antal barn</label><button type="button" class="infobtn" aria-label="Förklaring av antal barn" data-tip="Barn som bor i hushållet. Barnbidrag och barnens vanliga vardagskostnader räknas automatiskt.">i</button></div><div class="control"><input id="children" type="number" min="0" placeholder="0"></div></div>
@@ -50,23 +92,23 @@
 <div class="field"><div class="labelrow"><label for="pets">Antal husdjur</label><button type="button" class="infobtn" aria-label="Förklaring av husdjur" data-tip="Schablonen är 800 kr per husdjur och månad för mat, försäkring och normal löpande vård. Större djur eller höga veterinärkostnader kan bli dyrare.">i</button></div><div class="control"><input id="pets" type="number" min="0" placeholder="0"></div></div>
 </div><div class="actions"><span></span><button type="button" class="btn primary next" data-next="2">Nästa</button></div></section>
 <section class="panel step hidden" data-step="2"><h3>Vad kostar bostaden?</h3><p>Vi räknar ut lån, ränta, amortering och avgift.</p><div class="grid">
-<div class="field"><div class="labelrow"><label for="price">Bostadens pris</label><button type="button" class="infobtn" aria-label="Förklaring av bostadens pris" data-tip="Det pris ni tror att ni kommer betala för bostaden.">i</button></div><div class="control"><input id="price" type="number" placeholder="3500000"><span class="unit">kr</span></div></div>
-<div class="field"><div class="labelrow"><label for="down">Kontantinsats</label><button type="button" class="infobtn" aria-label="Förklaring av kontantinsats" data-tip="Pengar ni betalar själva vid köpet. Resten behöver normalt finansieras med lån.">i</button></div><div class="control"><input id="down" type="number" placeholder="525000"><span class="unit">kr</span></div></div>
-<div class="field"><div class="labelrow"><label for="rate">Bolåneränta</label><button type="button" class="infobtn" aria-label="Förklaring av bolåneränta" data-tip="Bankens årliga ränta på bolånet. Använd gärna räntan från ett aktuellt låneerbjudande.">i</button></div><div class="control"><input id="rate" type="number" step="0.1" placeholder="3.5"><span class="unit">%</span></div></div>
-<div class="field"><div class="labelrow"><label for="fee">Månadsavgift</label><button type="button" class="infobtn" aria-label="Förklaring av månadsavgift" data-tip="Avgiften till bostadsrättsföreningen varje månad. För villa kan du skriva 0 kr.">i</button></div><div class="control"><input id="fee" type="number" placeholder="4500"><span class="unit">kr</span></div></div>
-<div class="field"><div class="labelrow"><label for="drift">El, bredband och drift</label><button type="button" class="infobtn" aria-label="Förklaring av driftkostnader" data-tip="Till exempel el, uppvärmning, vatten, sophämtning och bredband som inte redan ingår i avgiften.">i</button></div><div class="control"><input id="drift" type="number" placeholder="1200"><span class="unit">kr</span></div></div>
+<div class="field"><div class="labelrow"><label for="price">Bostadens pris <span class="req">*</span></label><button type="button" class="infobtn" aria-label="Förklaring av bostadens pris" data-tip="Det pris ni tror att ni kommer betala för bostaden.">i</button></div><div class="control"><input id="price" type="number" placeholder="3500000" required><span class="unit">kr</span></div></div>
+<div class="field"><div class="labelrow"><label for="down">Kontantinsats <span class="req">*</span></label><button type="button" class="infobtn" aria-label="Förklaring av kontantinsats" data-tip="Pengar ni betalar själva vid köpet. Resten behöver normalt finansieras med lån.">i</button></div><div class="control"><input id="down" type="number" placeholder="525000" required><span class="unit">kr</span></div></div>
+<div class="field"><div class="labelrow"><label for="rate">Bolåneränta <span class="req">*</span></label><button type="button" class="infobtn" aria-label="Förklaring av bolåneränta" data-tip="Bankens årliga ränta på bolånet. Använd gärna räntan från ett aktuellt låneerbjudande.">i</button></div><div class="control"><input id="rate" type="number" step="0.1" placeholder="3.5" required><span class="unit">%</span></div></div>
+<div class="field"><div class="labelrow"><label for="fee">Månadsavgift <span class="req">*</span></label><button type="button" class="infobtn" aria-label="Förklaring av månadsavgift" data-tip="Avgiften till bostadsrättsföreningen varje månad. För villa kan du skriva 0 kr.">i</button></div><div class="control"><input id="fee" type="number" placeholder="4500" required><span class="unit">kr</span></div></div>
+<div class="field"><div class="labelrow"><label for="drift">El, bredband och drift <span class="req">*</span></label><button type="button" class="infobtn" aria-label="Förklaring av driftkostnader" data-tip="Till exempel el, uppvärmning, vatten, sophämtning och bredband som inte redan ingår i avgiften.">i</button></div><div class="control"><input id="drift" type="number" placeholder="1200" required><span class="unit">kr</span></div></div>
 <div class="field"><div class="labelrow"><label for="amort">Amortering</label><button type="button" class="infobtn" aria-label="Förklaring av amortering" data-tip="Den del av lånet ni betalar tillbaka varje månad. Välj Räkna ut åt mig om du är osäker.">i</button></div><div class="control"><select id="amort"><option value="auto">Räkna ut åt mig</option><option value="0">0 % per år</option><option value="1">1 % per år</option><option value="2">2 % per år</option><option value="3">3 % per år</option></select></div></div>
 </div><div class="actions"><button type="button" class="btn secondary prev" data-prev="1">Tillbaka</button><button type="button" class="btn primary next" data-next="3">Nästa</button></div></section>
 <section class="panel step hidden" data-step="3"><h3>Hur ser vardagsekonomin ut?</h3><p>Vi fyller i rimliga exempel som du kan ändra.</p><div class="grid">
-<div class="field"><div class="labelrow"><label for="buffer">Pengar kvar efter köpet</label><button type="button" class="infobtn" aria-label="Förklaring av buffert" data-tip="Sparpengar som finns kvar när kontantinsats och andra kostnader för köpet är betalda.">i</button></div><div class="control"><input id="buffer" type="number" placeholder="150000"><span class="unit">kr</span></div></div>
-<div class="field"><div class="labelrow"><label for="loans">Övriga lån per månad</label><button type="button" class="infobtn" aria-label="Förklaring av övriga lån" data-tip="Månadsbetalningar för exempelvis CSN, billån, privatlån eller avbetalningar.">i</button></div><div class="control"><input id="loans" type="number" placeholder="0"><span class="unit">kr</span></div></div>
-<div class="field"><div class="labelrow"><label for="food">Mat och dagligvaror</label><button type="button" class="infobtn" aria-label="Förklaring av mat och dagligvaror" data-tip="Mat hemma, luncher, hushållspapper, rengöring och andra vanliga inköp från mataffären.">i</button></div><div class="control"><input id="food" type="number" placeholder="3200"><span class="unit">kr</span></div><div id="foodStandardNote" class="standard-note"></div></div>
-<div class="field"><div class="labelrow"><label for="transport">Bil och transport</label><button type="button" class="infobtn" aria-label="Förklaring av bil och transport" data-tip="Till exempel drivmedel, bilförsäkring, service, parkering, kollektivtrafik och pendling.">i</button></div><div class="control"><input id="transport" type="number" placeholder="1200"><span class="unit">kr</span></div><div id="transportStandardNote" class="standard-note"></div></div>
-<div class="field"><div class="labelrow"><label for="fixed">Mobil, internet och försäkringar</label><button type="button" class="infobtn" aria-label="Förklaring av fasta kostnader" data-tip="Mobilabonnemang, bredband och vanliga försäkringar som hem-, person- och bilförsäkring.">i</button></div><div class="control"><input id="fixed" type="number" placeholder="900"><span class="unit">kr</span></div><div id="fixedStandardNote" class="standard-note"></div></div>
-<div class="field"><div class="labelrow"><label for="unionFee">Fack och a-kassa</label><button type="button" class="infobtn" aria-label="Förklaring av fack och a-kassa" data-tip="Medlemsavgifter för fackförbund och a-kassa. Schablonen 700 kr motsvarar ungefär två vuxna, men avgiften varierar.">i</button></div><div class="control"><input id="unionFee" type="number" placeholder="350"><span class="unit">kr</span></div><div id="unionFeeStandardNote" class="standard-note"></div></div>
-<div class="field"><div class="labelrow"><label for="gym">Gym och träning</label><button type="button" class="infobtn" aria-label="Förklaring av gym" data-tip="Gymkort, träningsappar, föreningsavgifter och andra återkommande träningskostnader.">i</button></div><div class="control"><input id="gym" type="number" placeholder="300"><span class="unit">kr</span></div><div id="gymStandardNote" class="standard-note"></div></div>
-<div class="field"><div class="labelrow"><label for="medicine">Mediciner och hälsa</label><button type="button" class="infobtn" aria-label="Förklaring av hälsokostnader" data-tip="Mediciner, patientavgifter och ett mindre månadssparande för exempelvis tandvård, glasögon eller behandlingar.">i</button></div><div class="control"><input id="medicine" type="number" placeholder="150"><span class="unit">kr</span></div><div id="medicineStandardNote" class="standard-note"></div></div>
-<div class="field"><div class="labelrow"><label for="other">Nöjen, kläder och övrigt</label><button type="button" class="infobtn" aria-label="Förklaring av övriga vardagskostnader" data-tip="Restaurang, streaming, kläder, presenter, semester och andra kostnader som varierar.">i</button></div><div class="control"><input id="other" type="number" placeholder="2200"><span class="unit">kr</span></div><div id="otherStandardNote" class="standard-note"></div></div>
+<div class="field"><div class="labelrow"><label for="buffer">Pengar kvar efter köpet <span class="req">*</span></label><button type="button" class="infobtn" aria-label="Förklaring av buffert" data-tip="Sparpengar som finns kvar när kontantinsats och andra kostnader för köpet är betalda.">i</button></div><div class="control"><input id="buffer" type="number" placeholder="150000" required><span class="unit">kr</span></div></div>
+<div class="field"><div class="labelrow"><label for="loans">Övriga lån per månad <span class="req">*</span></label><button type="button" class="infobtn" aria-label="Förklaring av övriga lån" data-tip="Månadsbetalningar för exempelvis CSN, billån, privatlån eller avbetalningar.">i</button></div><div class="control"><input id="loans" type="number" placeholder="0" required><span class="unit">kr</span></div></div>
+<div class="field"><div class="labelrow"><label for="food">Mat och dagligvaror <span class="req">*</span></label><button type="button" class="infobtn" aria-label="Förklaring av mat och dagligvaror" data-tip="Mat hemma, luncher, hushållspapper, rengöring och andra vanliga inköp från mataffären.">i</button></div><div class="control"><input id="food" type="number" placeholder="3200" required><span class="unit">kr</span></div><div id="foodStandardNote" class="standard-note"></div></div>
+<div class="field"><div class="labelrow"><label for="transport">Bil och transport <span class="req">*</span></label><button type="button" class="infobtn" aria-label="Förklaring av bil och transport" data-tip="Till exempel drivmedel, bilförsäkring, service, parkering, kollektivtrafik och pendling.">i</button></div><div class="control"><input id="transport" type="number" placeholder="1200" required><span class="unit">kr</span></div><div id="transportStandardNote" class="standard-note"></div></div>
+<div class="field"><div class="labelrow"><label for="fixed">Mobil, internet och försäkringar <span class="req">*</span></label><button type="button" class="infobtn" aria-label="Förklaring av fasta kostnader" data-tip="Mobilabonnemang, bredband och vanliga försäkringar som hem-, person- och bilförsäkring.">i</button></div><div class="control"><input id="fixed" type="number" placeholder="900" required><span class="unit">kr</span></div><div id="fixedStandardNote" class="standard-note"></div></div>
+<div class="field"><div class="labelrow"><label for="unionFee">Fack och a-kassa <span class="req">*</span></label><button type="button" class="infobtn" aria-label="Förklaring av fack och a-kassa" data-tip="Medlemsavgifter för fackförbund och a-kassa. Schablonen 700 kr motsvarar ungefär två vuxna, men avgiften varierar.">i</button></div><div class="control"><input id="unionFee" type="number" placeholder="350" required><span class="unit">kr</span></div><div id="unionFeeStandardNote" class="standard-note"></div></div>
+<div class="field"><div class="labelrow"><label for="gym">Gym och träning <span class="req">*</span></label><button type="button" class="infobtn" aria-label="Förklaring av gym" data-tip="Gymkort, träningsappar, föreningsavgifter och andra återkommande träningskostnader.">i</button></div><div class="control"><input id="gym" type="number" placeholder="300" required><span class="unit">kr</span></div><div id="gymStandardNote" class="standard-note"></div></div>
+<div class="field"><div class="labelrow"><label for="medicine">Mediciner och hälsa <span class="req">*</span></label><button type="button" class="infobtn" aria-label="Förklaring av hälsokostnader" data-tip="Mediciner, patientavgifter och ett mindre månadssparande för exempelvis tandvård, glasögon eller behandlingar.">i</button></div><div class="control"><input id="medicine" type="number" placeholder="150" required><span class="unit">kr</span></div><div id="medicineStandardNote" class="standard-note"></div></div>
+<div class="field"><div class="labelrow"><label for="other">Nöjen, kläder och övrigt <span class="req">*</span></label><button type="button" class="infobtn" aria-label="Förklaring av övriga vardagskostnader" data-tip="Restaurang, streaming, kläder, presenter, semester och andra kostnader som varierar.">i</button></div><div class="control"><input id="other" type="number" placeholder="2200" required><span class="unit">kr</span></div><div id="otherStandardNote" class="standard-note"></div></div>
 <div id="childCostFields" class="conditional-section">
 <h4 class="subheading">Extra kostnader för barn</h4>
 <div class="field"><div class="labelrow"><label for="preschool">Förskola och fritids</label><button type="button" class="infobtn" aria-label="Förklaring av förskola" data-tip="Avgifter för förskola eller fritidshem. Kostnaden beror på hushållets inkomst, kommun och antal barn.">i</button></div><div class="control"><input id="preschool" type="number" placeholder="1200"><span class="unit">kr</span></div><div id="preschoolStandardNote" class="standard-note"></div></div>
@@ -168,6 +210,14 @@ function u16(n){return[n&255,(n>>>8)&255]}function u32(n){return[n&255,(n>>>8)&2
 function makeZip(files){const enc=new TextEncoder(),chunks=[],central=[];let offset=0;for(const [name,data] of Object.entries(files)){const nb=enc.encode(name),crc=crc32(data),local=new Uint8Array([...u32(0x04034b50),...u16(20),...u16(0),...u16(0),...u16(0),...u16(0),...u32(crc),...u32(data.length),...u32(data.length),...u16(nb.length),...u16(0),...nb]);chunks.push(local,data);central.push(new Uint8Array([...u32(0x02014b50),...u16(20),...u16(20),...u16(0),...u16(0),...u16(0),...u16(0),...u32(crc),...u32(data.length),...u32(data.length),...u16(nb.length),...u16(0),...u16(0),...u16(0),...u16(0),...u32(0),...u32(offset),...nb]));offset+=local.length+data.length}const size=central.reduce((s,x)=>s+x.length,0),end=new Uint8Array([...u32(0x06054b50),...u16(0),...u16(0),...u16(central.length),...u16(central.length),...u32(size),...u32(offset),...u16(0)]);return new Blob([...chunks,...central,end],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'})}
 function download(){const current=calc(),values={salary1:num('salary1'),salary2:$('co').value==='yes'?num('salary2'):0,children:num('children'),pets:num('pets'),price:num('price'),down:num('down'),rate:num('rate'),fee:num('fee'),drift:num('drift'),amortValue:$('amort').value==='auto'?(current.amort*12/Math.max(current.loan,1)*100):Number($('amort').value),buffer:num('buffer'),loans:num('loans'),food:num('food'),transport:num('transport'),fixed:num('fixed'),unionFee:num('unionFee'),gym:num('gym'),medicine:num('medicine'),other:num('other'),preschool:num('preschool'),childActivities:num('childActivities'),childOther:num('childOther'),petCost:num('petCost')},files={};for(const [name,b64] of Object.entries(XLSX_PARTS)){let bytes=b64bytes(b64);if(name==='xl/worksheets/sheet2.xml'){let text=new TextDecoder().decode(bytes);for(const [key,val] of Object.entries(values))text=text.replaceAll('{{'+key+'}}',String(Number(val)||0));bytes=new TextEncoder().encode(text)}files[name]=bytes}const blob=makeZip(files),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='BoendeIQ-rapport.xlsx';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
 document.querySelectorAll('.stepnav').forEach(n=>{n.addEventListener('click',()=>showStep(Number(n.dataset.nav)));n.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();showStep(Number(n.dataset.nav))}})});document.querySelectorAll('.next').forEach(b=>b.onclick=()=>showStep(Number(b.dataset.next)));document.querySelectorAll('.prev').forEach(b=>b.onclick=()=>showStep(Number(b.dataset.prev)));$('co').onchange=()=>{$('salary2Field').classList.toggle('hidden',$('co').value==='no');updateLive()};document.querySelectorAll('input,select').forEach(x=>x.addEventListener('input',updateLive));$('calcForm').addEventListener('submit',e=>{e.preventDefault();render()});
+function updateRequiredFields(){
+ const hasCo=$('co').value==='yes';
+ const field=$('salary2Field');
+ $('salary2').required=hasCo;
+ $('church2').disabled=!hasCo;
+ field.classList.toggle('field-hidden',!hasCo);
+ field.setAttribute('aria-hidden',String(!hasCo));
+}
 function householdAdults(){return $('co').value==='yes'?2:1}
 function updateHouseholdPlaceholders(){
  const adults=householdAdults(),children=Math.max(0,Math.floor(num('children'))),pets=Math.max(0,Math.floor(num('pets')));
@@ -240,12 +290,24 @@ $('municipality').addEventListener('input',updateLive);
 $('municipality').addEventListener('change',updateLive);
 $('church1').addEventListener('change',updateLive);
 $('church2').addEventListener('change',updateLive);
-$('co').addEventListener('change',()=>{updateHouseholdPlaceholders();updateLive()});
+$('co').addEventListener('change',()=>{updateRequiredFields();updateHouseholdPlaceholders();updateLive()});
 $('children').addEventListener('input',()=>{updateConditionalFields();updateHouseholdPlaceholders();updateLive()});
 $('pets').addEventListener('input',()=>{updateConditionalFields();updateHouseholdPlaceholders();updateLive()});
+updateRequiredFields();
 updateConditionalFields();
 updateHouseholdPlaceholders();
 updateLive();
 $('download').onclick=download;document.querySelectorAll('.detailhead').forEach(btn=>btn.addEventListener('click',()=>{const card=btn.closest('.detail'),open=card.classList.toggle('open');btn.setAttribute('aria-expanded',String(open))}));let id=localStorage.getItem('boendeiqVisitor');if(!id){id='B'+Math.random().toString(36).slice(2,9).toUpperCase();localStorage.setItem('boendeiqVisitor',id)}let visits=(Number(localStorage.getItem('boendeiqVisits'))||0)+1;localStorage.setItem('boendeiqVisits',visits);$('visitor').textContent=`Testprofil ${id} · besök ${visits}`;updateLive();
 </script>
+
+<!-- ROLLBACK NOTE:
+Current behaviour:
+- Co-applicant defaults to No.
+- Co-applicant fields are hidden unless Yes is selected.
+- Ordinary cost fields are required, but 0 is allowed.
+Previous fully optional behaviour:
+- Cost fields could remain blank and were treated as 0.
+To restore that mode, remove required attributes from the cost inputs and bypass validateCurrentStep.
+-->
+
 </body></html>
