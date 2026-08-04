@@ -11,7 +11,14 @@
 .conditional-section{display:none}.conditional-section.visible{display:contents}
 .subheading{grid-column:1/-1;margin:8px 0 -4px;padding-top:15px;border-top:1px solid var(--line);font-size:16px}
 .summary-income{display:flex;justify-content:space-between;padding:10px 0;border-top:1px solid rgba(255,255,255,.14)}
-.summary-income span{color:#c6cfdb}.summary-income strong{color:#fff}.actions{display:flex;justify-content:space-between;gap:12px;margin-top:28px}.hidden{display:none!important}.live{margin-top:18px;background:#111827;color:#fff;border-radius:18px;padding:18px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.live div{padding:7px 14px;border-right:1px solid rgba(255,255,255,.12)}.live div:last-child{border:0}.live span{display:block;color:#adb7c6;font-size:12px}.live strong{font-size:18px;display:block;margin-top:5px}.result{margin-top:28px}.scorebox{background:linear-gradient(135deg,#111827,#20315d);color:#fff;border-radius:26px;padding:32px;display:grid;grid-template-columns:150px 1fr;gap:28px;align-items:center;box-shadow:var(--shadow)}.ring{width:146px;height:146px;border-radius:50%;display:grid;place-items:center}.ring>div{width:108px;height:108px;border-radius:50%;background:#fff;color:var(--text);display:flex;align-items:baseline;justify-content:center;padding-top:30px}.ring strong{font-size:44px}.ring span{color:var(--muted)}.scorebox h3{font-size:31px;margin:10px 0 5px}.scorebox p{margin:0;color:#c6cfdb}.tag{display:inline-flex;padding:7px 10px;border-radius:999px;font-size:12px;font-weight:800}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:16px 0}.metric{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px}.metric span{display:block;color:var(--muted);font-size:13px}.metric strong{display:block;font-size:24px;margin-top:8px}.detailgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.detail{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden}.detailhead{width:100%;border:0;background:#fff;padding:20px 22px;display:flex;align-items:center;justify-content:space-between;text-align:left;color:var(--text)}.detailhead:hover{background:#f8f9fc}.detailhead h4{margin:0;font-size:19px}.detailhead span{color:var(--muted);font-size:13px}.detailtitle{min-width:0}.detailsummary{display:flex;align-items:center;gap:14px}.detailtotal{font-size:17px!important;font-weight:850;color:var(--text)!important;white-space:nowrap}.chevron{width:30px;height:30px;border-radius:10px;background:#f1f3f8;display:grid;place-items:center;transition:.2s}.detail.open .chevron{transform:rotate(180deg)}.detailbody{display:none;padding:0 22px 18px}.detail.open .detailbody{display:block}.row{display:flex;justify-content:space-between;gap:20px;padding:11px 0;border-bottom:1px solid var(--line);font-size:14px}.row span{color:var(--muted)}.row.total{font-weight:850;border:0;padding-top:15px}.note{margin-top:16px;padding:16px;border-radius:14px;background:#eef1f5;color:#556273;font-size:13px}.score-explainer{margin:16px 0;background:#fff;border:1px solid var(--line);border-radius:20px;padding:22px}
+.summary-income span{color:#c6cfdb}.summary-income strong{color:#fff}.actions{display:flex;justify-content:space-between;gap:12px;margin-top:28px}.hidden{display:none!important}.live{margin-top:18px;background:#111827;color:#fff;border-radius:18px;padding:18px;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:0}.live div{padding:7px 14px;border-right:1px solid rgba(255,255,255,.12)}.live div:last-child{border:0}.live span{display:block;color:#adb7c6;font-size:12px}.live>div{min-width:0;padding:0 18px;border-left:1px solid rgba(255,255,255,.12)}
+.live>div:first-child{border-left:0}
+.live span{display:block;font-size:12px;color:#c4ccda;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.live strong{font-size:17px;display:block;margin-top:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.live-saving{transition:color .18s ease}
+.saving-good{color:#6ee7b7}
+.saving-ok{color:#fcd34d}
+.saving-low{color:#fda4af}.result{margin-top:28px}.scorebox{background:linear-gradient(135deg,#111827,#20315d);color:#fff;border-radius:26px;padding:32px;display:grid;grid-template-columns:150px 1fr;gap:28px;align-items:center;box-shadow:var(--shadow)}.ring{width:146px;height:146px;border-radius:50%;display:grid;place-items:center}.ring>div{width:108px;height:108px;border-radius:50%;background:#fff;color:var(--text);display:flex;align-items:baseline;justify-content:center;padding-top:30px}.ring strong{font-size:44px}.ring span{color:var(--muted)}.scorebox h3{font-size:31px;margin:10px 0 5px}.scorebox p{margin:0;color:#c6cfdb}.tag{display:inline-flex;padding:7px 10px;border-radius:999px;font-size:12px;font-weight:800}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:16px 0}.metric{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px}.metric span{display:block;color:var(--muted);font-size:13px}.metric strong{display:block;font-size:24px;margin-top:8px}.detailgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.detail{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden}.detailhead{width:100%;border:0;background:#fff;padding:20px 22px;display:flex;align-items:center;justify-content:space-between;text-align:left;color:var(--text)}.detailhead:hover{background:#f8f9fc}.detailhead h4{margin:0;font-size:19px}.detailhead span{color:var(--muted);font-size:13px}.detailtitle{min-width:0}.detailsummary{display:flex;align-items:center;gap:14px}.detailtotal{font-size:17px!important;font-weight:850;color:var(--text)!important;white-space:nowrap}.chevron{width:30px;height:30px;border-radius:10px;background:#f1f3f8;display:grid;place-items:center;transition:.2s}.detail.open .chevron{transform:rotate(180deg)}.detailbody{display:none;padding:0 22px 18px}.detail.open .detailbody{display:block}.row{display:flex;justify-content:space-between;gap:20px;padding:11px 0;border-bottom:1px solid var(--line);font-size:14px}.row span{color:var(--muted)}.row.total{font-weight:850;border:0;padding-top:15px}.note{margin-top:16px;padding:16px;border-radius:14px;background:#eef1f5;color:#556273;font-size:13px}.score-explainer{margin:16px 0;background:#fff;border:1px solid var(--line);border-radius:20px;padding:22px}
 .score-explainer h4{margin:0 0 8px;font-size:20px}.score-explainer>p{color:var(--muted);line-height:1.55;margin:0 0 18px}
 .scale{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.scaleitem{padding:12px 10px;border-radius:13px;background:#f5f7fb;border:1px solid transparent;text-align:center}
 .scaleitem strong{display:block;font-size:13px}.scaleitem span{display:block;color:var(--muted);font-size:11px;margin-top:4px}.scaleitem.active{background:#eef1ff;border-color:#bfc8ff;box-shadow:0 8px 22px rgba(64,92,245,.10)}
@@ -20,7 +27,7 @@
 .allocation-ring{width:170px;height:170px;border-radius:50%;display:grid;place-items:center}.allocation-ring>div{width:102px;height:102px;border-radius:50%;background:#fff;display:grid;place-items:center;text-align:center}.allocation-ring strong{font-size:20px}.allocation-ring span{font-size:11px;color:var(--muted)}
 .allocation-list{display:grid;gap:9px}.allocation-row{display:grid;grid-template-columns:auto 1fr auto;gap:9px;align-items:center;font-size:13px}.allocation-dot{width:10px;height:10px;border-radius:50%}.allocation-row span{color:var(--muted)}
 .reportbar{display:flex;justify-content:space-between;align-items:center;margin:28px 0 14px}.reportbar h2{margin:0}.footer{padding:26px 0 40px;color:var(--muted);font-size:12px;display:flex;justify-content:space-between}
-@media(max-width:900px){.hero{grid-template-columns:1fr}.wizard{grid-template-columns:1fr}.steps{position:static;display:flex;overflow:auto}.stepnav{min-width:170px}.cards{grid-template-columns:1fr 1fr}.live{grid-template-columns:1fr 1fr}.detailgrid{grid-template-columns:1fr}}
+@media(max-width:900px){.hero{grid-template-columns:1fr}.wizard{grid-template-columns:1fr}.steps{position:static;display:flex;overflow:auto}.stepnav{min-width:170px}.cards{grid-template-columns:1fr 1fr}.live{grid-template-columns:repeat(2,minmax(0,1fr))}.detailgrid{grid-template-columns:1fr}}
 @media(max-width:750px){.scale{grid-template-columns:1fr 1fr}.allocation{grid-template-columns:1fr}.allocation-ring{margin:auto}}@media(max-width:600px){.wrap{padding:0 16px}.top{height:62px}.hero{padding-top:42px}.hero h1{font-size:43px}.grid{grid-template-columns:1fr}.panel{padding:22px 17px}.steps{display:none}.live,.cards{grid-template-columns:1fr}.live div{border-right:0;border-bottom:1px solid rgba(255,255,255,.12)}.scorebox{grid-template-columns:1fr}.reportbar{display:block}.reportbar .btn{width:100%;margin-top:12px}.footer{display:block}.footer span{display:block;margin-top:5px}}
 
 .field-hidden{display:none!important}
@@ -64,6 +71,21 @@
   .standard-note{min-height:0}
 }
 
+
+@media(max-width:1100px) and (min-width:761px){
+ .live{grid-template-columns:repeat(3,minmax(0,1fr));gap:0}
+ .live>div:nth-child(4){border-left:0}
+ .live>div:nth-child(n+4){border-top:1px solid rgba(255,255,255,.12);padding-top:14px;margin-top:14px}
+}
+@media(max-width:760px){
+ .live{grid-template-columns:repeat(2,minmax(0,1fr));padding:15px}
+ .live>div{padding:12px 14px;border-left:1px solid rgba(255,255,255,.12);border-top:1px solid rgba(255,255,255,.12)}
+ .live>div:nth-child(odd){border-left:0}
+ .live>div:nth-child(-n+2){border-top:0}
+ .live span{font-size:11px}
+ .live strong{font-size:16px}
+}
+
 </style>
 </head>
 <body>
@@ -80,11 +102,11 @@
 <section class="panel step" data-step="1"><h3>Vilka köper bostaden?</h3><p>Vi använder lönen för att uppskatta inkomsten efter skatt.</p><div class="grid">
 <div class="field"><div class="labelrow"><label for="municipality">Var bor du?</label><button type="button" class="infobtn" aria-label="Varför kommunen behövs" data-tip="Kommunen påverkar kommun- och regionskatten och därmed nettolönen. Kalkylen använder 2026 års skattesatser. Skatten styrs normalt av var du var folkbokförd den 1 november året före inkomståret.">i</button></div><div class="control"><input id="municipality" type="text" placeholder="T.ex. Bromma, Enskededalen eller Malmö" list="municipalityList" autocomplete="off"></div><datalist id="municipalityList"><option value="Borlänge"></option><option value="Borås"></option><option value="Botkyrka"></option><option value="Danderyd"></option><option value="Ekerö"></option><option value="Eskilstuna"></option><option value="Falun"></option><option value="Gotland"></option><option value="Gävle"></option><option value="Göteborg"></option><option value="Halmstad"></option><option value="Haninge"></option><option value="Helsingborg"></option><option value="Huddinge"></option><option value="Järfälla"></option><option value="Jönköping"></option><option value="Kalmar"></option><option value="Karlskrona"></option><option value="Karlstad"></option><option value="Kristianstad"></option><option value="Kungsbacka"></option><option value="Kungälv"></option><option value="Landskrona"></option><option value="Lerum"></option><option value="Lidingö"></option><option value="Linköping"></option><option value="Luleå"></option><option value="Lund"></option><option value="Malmö"></option><option value="Mölndal"></option><option value="Nacka"></option><option value="Norrköping"></option><option value="Norrtälje"></option><option value="Nykvarn"></option><option value="Nynäshamn"></option><option value="Partille"></option><option value="Salem"></option><option value="Sigtuna"></option><option value="Skellefteå"></option><option value="Sollentuna"></option><option value="Solna"></option><option value="Stockholm"></option><option value="Sundbyberg"></option><option value="Sundsvall"></option><option value="Södertälje"></option><option value="Trelleborg"></option><option value="Tyresö"></option><option value="Täby"></option><option value="Umeå"></option><option value="Upplands Väsby"></option><option value="Uppsala"></option><option value="Vallentuna"></option><option value="Varberg"></option><option value="Värmdö"></option><option value="Västerås"></option><option value="Växjö"></option><option value="Ystad"></option><option value="Ängelholm"></option><option value="Örebro"></option><option value="Östersund"></option><option value="Österåker"></option></datalist><div id="taxRateNote" class="tax-note"></div></div>
 <div class="field"><div class="labelrow"><label for="church1">Medlem i Svenska kyrkan?</label><button type="button" class="infobtn" aria-label="Förklaring av kyrkoavgift" data-tip="Medlemmar betalar kyrkoavgift. Avgiften varierar mellan församlingar. Kalkylen använder 2026 års riksgenomsnitt på 1,05 procent. Begravningsavgift ingår även för den som inte är medlem.">i</button></div><div class="control"><select id="church1"><option value="no" selected>Nej</option><option value="yes">Ja</option></select></div></div>
-<div class="field"><div class="labelrow"><label for="salary1">Din lön före skatt <span class="req">*</span></label><button type="button" class="infobtn" aria-label="Förklaring av din lön före skatt" data-tip="Din vanliga månadslön innan skatt. Ta med fast lön, men inte osäker bonus eller övertid.">i</button></div><div class="control"><input id="salary1" type="number" placeholder="35000" required><span class="unit">kr</span></div></div>
+<div class="field"><div class="labelrow"><label for="salary1">Din lön före skatt <span class="req">*</span></label><button type="button" class="infobtn" aria-label="Förklaring av din lön före skatt" data-tip="Din vanliga månadslön innan skatt. Ta med fast lön, men inte osäker bonus eller övertid.">i</button></div><div class="control"><input id="salary1" type="number" placeholder="42900" required title="Exempelvärde: Sveriges genomsnittliga månadslön 2025"><span class="unit">kr</span></div></div>
 <div id="netPreview1" class="income-preview"><span>Beräknad nettolön person 1</span><strong>–</strong></div>
 
 <div class="field"><div class="labelrow"><label for="co">Köper du med någon?</label><button type="button" class="infobtn" aria-label="Förklaring av medsökande" data-tip="Välj Ja om en partner eller annan person ska stå med på lånet och köpa bostaden tillsammans med dig.">i</button></div><div class="control"><select id="co"><option value="yes">Ja</option><option value="no" selected>Nej</option></select></div></div>
-<div class="field field-hidden" id="salary2Field" aria-hidden="true"><div class="labelrow"><label for="salary2">Den andra personens lön</label><button type="button" class="infobtn" aria-label="Förklaring av den andra personens lön" data-tip="Medsökandens vanliga månadslön innan skatt.">i</button></div><div class="control"><input id="salary2" type="number" placeholder="35000"><span class="unit">kr</span></div>
+<div class="field field-hidden" id="salary2Field" aria-hidden="true"><div class="labelrow"><label for="salary2">Den andra personens lön</label><button type="button" class="infobtn" aria-label="Förklaring av den andra personens lön" data-tip="Medsökandens vanliga månadslön innan skatt.">i</button></div><div class="control"><input id="salary2" type="number" placeholder="42900" title="Exempelvärde: Sveriges genomsnittliga månadslön 2025"><span class="unit">kr</span></div>
 <div class="labelrow" style="margin-top:12px"><label for="church2">Medsökande medlem i Svenska kyrkan?</label><button type="button" class="infobtn" aria-label="Förklaring av kyrkoavgift för medsökande" data-tip="Kyrkoavgiften beräknas separat och använder 2026 års riksgenomsnitt på 1,05 procent.">i</button></div><div class="control"><select id="church2"><option value="no" selected>Nej</option><option value="yes">Ja</option></select></div>
 <div id="netPreview2" class="income-preview" style="margin-top:12px"><span>Beräknad nettolön medsökande</span><strong>–</strong></div></div>
 <div class="field"><div class="labelrow"><label for="children">Antal barn</label><button type="button" class="infobtn" aria-label="Förklaring av antal barn" data-tip="Barn som bor i hushållet. Barnbidrag och barnens vanliga vardagskostnader räknas automatiskt.">i</button></div><div class="control"><input id="children" type="number" min="0" placeholder="0"></div></div>
@@ -119,7 +141,7 @@
 <h4 class="subheading">Kostnad för husdjur</h4>
 <div class="field"><div class="labelrow"><label for="petCost">Husdjur totalt</label><button type="button" class="infobtn" aria-label="Förklaring av husdjurskostnader" data-tip="Förifyllt med 800 kr per husdjur och månad för mat, försäkring och normal löpande vård. Större veterinärbesök ingår inte.">i</button></div><div class="control"><input id="petCost" type="number" placeholder="800"><span class="unit">kr</span></div><div id="petCostStandardNote" class="standard-note"></div></div>
 </div>
-</div><div class="live"><div><span>Lån</span><strong id="liveLoan">–</strong></div><div><span>Belåningsgrad</span><strong id="liveLtv">–</strong></div><div><span>Nettoinkomst</span><strong id="liveNet">–</strong></div><div><span>Boende efter avdrag</span><strong id="liveHousing">–</strong></div></div><div class="actions"><button type="button" class="btn secondary prev" data-prev="2">Tillbaka</button><button id="submitBtn" type="submit" class="btn primary">Se mitt BoendeIQ</button></div></section>
+</div><div class="live"><div><span>Lån</span><strong id="liveLoan">–</strong></div><div><span>Belåningsgrad</span><strong id="liveLtv">–</strong></div><div><span>Nettoinkomst</span><strong id="liveNet">–</strong></div><div><span>Vardagskostnader</span><strong id="liveLiving">–</strong></div><div><span>Sparande</span><strong id="liveSaving" class="live-saving">–</strong></div><div><span>Boende efter avdrag</span><strong id="liveHousing">–</strong></div></div><div class="actions"><button type="button" class="btn secondary prev" data-prev="2">Tillbaka</button><button id="submitBtn" type="submit" class="btn primary">Se mitt BoendeIQ</button></div></section>
 </form>
 <div id="result" class="result hidden"><div class="reportbar"><div><div class="pill" style="display:inline-flex">Din analys</div><h2>Så ser köpet ut</h2></div><button id="download" class="btn secondary">Ladda ner Excelrapport</button></div>
 <div class="scorebox"><div class="ring" id="ring"><div><strong id="score">0</strong><span>/100</span></div></div><div><div id="scoreTag" class="tag">Inte beräknad</div><h3 id="headline">Din analys visas här</h3><p id="explain"></p></div></div>
@@ -196,7 +218,21 @@ function taxTableNumber(church){const key=normalizeMunicipality($('municipality'
 function estimatedTax(g,church){g=Math.max(0,Number(g)||0);if(!g)return 0;let rate;if(g<=20000)rate=.105+(g/20000)*.065;else if(g<=40000)rate=.17+(g-20000)/20000*.04;else if(g<=55000)rate=.21+(g-40000)/15000*.03;else if(g<=70000)rate=.24+(g-55000)/15000*.07;else rate=.31+Math.min(.12,(g-70000)/100000*.12);const table=taxTableNumber(church),adjust=(table-32)*g*.006;return Math.max(0,Math.round(g*rate+adjust))}
 function net(g,church=false){return Math.max(0,(Number(g)||0)-estimatedTax(g,church))}
 function calc(){const s1=num('salary1'),s2=$('co').value==='yes'?num('salary2'):0,children=num('children'),pets=num('pets'),benefit=childBenefit(children),net1=net(s1,$('church1').value==='yes'),net2=net(s2,$('church2').value==='yes'),netIncome=net1+net2+benefit,price=num('price'),down=num('down'),loan=Math.max(0,price-down),ltv=price?loan/price:0,annualGross=(s1+s2)*12,debt=annualGross?loan/annualGross:99;let ar;if($('amort').value==='auto'){ar=ltv>.7?.02:ltv>.5?.01:0;if(debt>4.5)ar+=.01}else ar=Number($('amort').value)/100;const annualInt=loan*num('rate')/100,borrowers=s2>0?2:1,threshold=100000*borrowers,tax=Math.min(annualInt,threshold)*.3+Math.max(0,annualInt-threshold)*.21,intBefore=annualInt/12,intAfter=(annualInt-tax)/12,amort=loan*ar/12,fixedHousing=num('fee')+num('drift'),housingBefore=intBefore+amort+fixedHousing,housingAfter=intAfter+amort+fixedHousing,baseChildCost=children*1800,extraChildCost=num('preschool')+num('childActivities')+num('childOther'),petCost=num('petCost'),living=num('food')+num('transport')+num('fixed')+num('unionFee')+num('gym')+num('medicine')+num('other')+num('loans')+baseChildCost+extraChildCost+petCost,surplus=netIncome-housingAfter-living,bufferMonths=(housingAfter+num('food')+num('transport')+num('fixed')+num('unionFee')+num('medicine')+num('loans'))?num('buffer')/(housingAfter+num('food')+num('transport')+num('fixed')+num('unionFee')+num('medicine')+num('loans')):0;let score=50;score+=clamp((surplus/netIncome-.08)*90,-25,25);score+=ltv<=.7?12:ltv<=.85?4:-15;score+=debt<=4.5?10:debt<=5.5?0:-12;score+=bufferMonths>=6?10:bufferMonths>=3?3:-10;score=Math.round(clamp(score,0,100));let bank=ltv<=.85&&debt<=4.5&&surplus>3000?'Starkt':ltv<=.85&&debt<=5.5&&surplus>=0?'Osäkert':'Svagt';return{score,netIncome,net1,net2,benefit,children,pets,baseChildCost,extraChildCost,petCost,price,down,loan,ltv,debt,intBefore,intAfter,tax:tax/12,amort,fixedHousing,housingBefore,housingAfter,living,surplus,bufferMonths,bank}}
-function updateLive(){const r=calc(),key=normalizeMunicipality($('municipality').value),rate=key?MUNICIPAL_RATES[key]:32.38;$('liveLoan').textContent=fmt(r.loan);$('liveLtv').textContent=(r.ltv*100).toFixed(1).replace('.',',')+' %';$('liveNet').textContent=fmt(r.netIncome);$('liveHousing').textContent=fmt(r.housingAfter);$('netPreview1').querySelector('strong').textContent=fmt(r.net1);$('netPreview2').querySelector('strong').textContent=fmt(r.net2);$('taxRateNote').textContent=(key?key:'Platsen hittades inte ännu – skriv ort, stadsdel eller kommun')+': kommun- och regionskatt '+rate.toFixed(2).replace('.',',')+' %. Beräknad skattetabell '+taxTableNumber($('church1').value==='yes')+' för person 1.'}
+function updateLive(){
+ const r=calc(),key=normalizeMunicipality($('municipality').value),rate=key?MUNICIPAL_RATES[key]:32.38;
+ $('liveLoan').textContent=fmt(r.loan);
+ $('liveLtv').textContent=(r.ltv*100).toFixed(1).replace('.',',')+' %';
+ $('liveNet').textContent=fmt(r.netIncome);
+ $('liveLiving').textContent=fmt(r.living);
+ $('liveSaving').textContent=fmt(r.surplus);
+ $('liveHousing').textContent=fmt(r.housingAfter);
+ const saving=$('liveSaving');
+ saving.classList.remove('saving-good','saving-ok','saving-low');
+ saving.classList.add(r.surplus>=10000?'saving-good':r.surplus>=3000?'saving-ok':'saving-low');
+ $('netPreview1').querySelector('strong').textContent=fmt(r.net1);
+ $('netPreview2').querySelector('strong').textContent=fmt(r.net2);
+ $('taxRateNote').textContent=(key?key:'Platsen hittades inte ännu – skriv ort, stadsdel eller kommun')+': kommun- och regionskatt '+rate.toFixed(2).replace('.',',')+' %. Beräknad skattetabell '+taxTableNumber($('church1').value==='yes')+' för person 1.';
+}
 function showStep(n){document.querySelectorAll('.step').forEach(x=>x.classList.toggle('hidden',Number(x.dataset.step)!==n));document.querySelectorAll('.stepnav').forEach(x=>x.classList.toggle('active',Number(x.dataset.nav)===n));window.scrollTo({top:document.getElementById('kalkyl').offsetTop-10,behavior:'smooth'})}
 function row(label,value,total=false){return `<div class="row ${total?'total':''}"><span>${label}</span><strong>${value}</strong></div>`}
 function scoreBand(score){return score>=85?['verystrong','Din poäng ligger tydligt över modellens referensnivå. Kalkylen visar mycket starka marginaler.']:score>=70?['strong','Din poäng ligger över eller omkring den trygga referensnivån. Köpet ser stabilt ut enligt modellens uppgifter.']:score>=55?['balanced','Din poäng ligger nära referensnivån. Köpet kan vara rimligt, men marginalerna är mindre.']:score>=40?['strained','Din poäng ligger under referensnivån. Ekonomin är känsligare för ränta och oväntade kostnader.']:['risk','Din poäng ligger tydligt under referensnivån. Köpet innebär hög ekonomisk belastning enligt kalkylen.']}
@@ -288,8 +324,8 @@ function updateHouseholdPlaceholders(){
  };
 
  // Income and housing examples
- set('salary1',35000);
- set('salary2',32000);
+ set('salary1',42900);
+ set('salary2',42900);
  set('price',3500000);
  set('down',525000);
  set('rate',3.5);
@@ -368,7 +404,22 @@ function downloadPdfReport(){
  .note{margin-top:18px;background:#FFF8E8;padding:12px;border-radius:9px;color:#7A5A14}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
  .card{border:1px solid #D9DEE8;border-radius:10px;padding:12px}.card span{color:#667085}.card strong{display:block;font-size:18px;margin-top:4px}
  footer{margin-top:24px;color:#667085;font-size:10px;text-align:center}
- </style></head><body>
+ 
+@media(max-width:1100px) and (min-width:761px){
+ .live{grid-template-columns:repeat(3,minmax(0,1fr));gap:0}
+ .live>div:nth-child(4){border-left:0}
+ .live>div:nth-child(n+4){border-top:1px solid rgba(255,255,255,.12);padding-top:14px;margin-top:14px}
+}
+@media(max-width:760px){
+ .live{grid-template-columns:repeat(2,minmax(0,1fr));padding:15px}
+ .live>div{padding:12px 14px;border-left:1px solid rgba(255,255,255,.12);border-top:1px solid rgba(255,255,255,.12)}
+ .live>div:nth-child(odd){border-left:0}
+ .live>div:nth-child(-n+2){border-top:0}
+ .live span{font-size:11px}
+ .live strong{font-size:16px}
+}
+
+</style></head><body>
  <div class="hero"><div><h1>BoendeIQ</h1><div>Ekonomisk bostadsanalys</div></div><div><div class="score">${r.score}/100</div><div>${esc(scoreText)}</div></div></div>
  <p class="sub">Rapport skapad ${new Date().toLocaleDateString('sv-SE')}.</p>
  <div class="grid">
