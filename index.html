@@ -474,7 +474,7 @@ function downloadPdfReport(){
  w.document.open();w.document.write(htmlReport);w.document.close();
 }
 
-$('download').onclick=download;$('downloadPdf').onclick=downloadPdfReport;document.querySelectorAll('.detailhead').forEach(btn=>btn.addEventListener('click',()=>{const card=btn.closest('.detail'),open=card.classList.toggle('open');btn.setAttribute('aria-expanded',String(open))}));let id=localStorage.getItem('boendeiqVisitor');if(!id){id='B'+Math.random().toString(36).slice(2,9).toUpperCase();localStorage.setItem('boendeiqVisitor',id)}let visits=(Number(localStorage.getItem('boendeiqVisits'))||0)+1;localStorage.setItem('boendeiqVisits',visits);$('visitor').textContent=`Testprofil ${id} · besök ${visits}`;syncDownPaymentFromPrice();updateLive();
+$('download').onclick=download;$('downloadPdf').onclick=downloadPdfReport;document.querySelectorAll('.detailhead').forEach(btn=>btn.addEventListener('click',()=>{const card=btn.closest('.detail'),open=card.classList.toggle('open');btn.setAttribute('aria-expanded',String(open))}));let id='B'+Math.random().toString(36).slice(2,9).toUpperCase(),visits=1;try{const savedId=localStorage.getItem('boendeiqVisitor');if(savedId){id=savedId}else{localStorage.setItem('boendeiqVisitor',id)}visits=(Number(localStorage.getItem('boendeiqVisits'))||0)+1;localStorage.setItem('boendeiqVisits',String(visits))}catch(storageError){console.info('Besöksmätning är avstängd i detta webbläsarläge.')}if($('visitor')){$('visitor').textContent=`Testprofil ${id} · besök ${visits}`}syncDownPaymentFromPrice();updateLive();
 </script>
 
 <!-- ROLLBACK NOTE:
