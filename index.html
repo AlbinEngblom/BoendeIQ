@@ -398,7 +398,7 @@
 <footer class="footer"><span>BoendeIQ · Gratis testverktyg</span><span id="visitor"></span></footer>
 </div>
 <script>
-const $=id=>document.getElementById(id), fmt=n=>new Intl.NumberFormat('sv-SE',{style:'currency',currency:'SEK',maximumFractionDigits:0}).format(Number(n)||0), num=id=>Number($(id).value)||0, clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
+const $=id=>document.getElementById(id), fmt=n=>new Intl.NumberFormat('sv-SE',{style:'currency',currency:'SEK',maximumFractionDigits:0}).format(Number(n)||0), num=id=>{const el=$(id);return el?(Number(el.value)||0):0}, clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 function childBenefit(children){const n=Math.max(0,Math.floor(Number(children)||0)),supplement=n===2?150:n===3?730:n===4?1740:n>=5?2990+(n-5)*1250:0;return n*1250+supplement}
 let last=null;
 const MUNICIPAL_RATES={"Stockholm":30.55,"Göteborg":32.6,"Malmö":32.42,"Uppsala":32.85,"Linköping":31.75,"Örebro":33.65,"Västerås":31.24,"Jönköping":33.4,"Helsingborg":31.39,"Norrköping":33.3,"Lund":32.42,"Umeå":34.65,"Gävle":33.77,"Borås":32.79,"Södertälje":32.38,"Eskilstuna":32.85,"Huddinge":31.71,"Nacka":30.11,"Sundsvall":33.88,"Karlstad":33.55,"Solna":29.7,"Täby":29.88,"Haninge":31.28,"Botkyrka":32.23,"Järfälla":31.52,"Tyresö":31.83,"Upplands Väsby":31.75,"Värmdö":31.31,"Sollentuna":30.45,"Danderyd":30.58,"Lidingö":29.67,"Sundbyberg":31.58,"Norrtälje":32.05,"Sigtuna":31.83,"Vallentuna":31.23,"Österåker":28.93,"Ekerö":31.45,"Salem":32.0,"Nynäshamn":32.18,"Nykvarn":32.3,"Kungsbacka":32.58,"Mölndal":31.99,"Partille":31.36,"Kungälv":32.92,"Lerum":32.03,"Växjö":32.19,"Kalmar":33.67,"Karlskrona":33.69,"Kristianstad":32.64,"Ystad":31.29,"Trelleborg":31.58,"Landskrona":31.42,"Ängelholm":31.35,"Halmstad":32.38,"Varberg":31.73,"Falun":34.05,"Borlänge":34.4,"Luleå":33.84,"Skellefteå":34.45,"Östersund":33.72,"Gotland":33.6};
@@ -620,6 +620,7 @@ function tailorCostsXml(xml,mode,housingType,currentType){
 }
 
 function download(){
+ try{
  const current=calc(),key=normalizeMunicipality($('municipality').value);
  const municipality=key||$('municipality').value.trim()||'Riksgenomsnitt';
  const municipalRate=key?MUNICIPAL_RATES[key]:32.38;
@@ -656,8 +657,6 @@ function download(){
   taxTable1:taxTableNumber($('church1').value==='yes'),
   analysisMode:analysisMode==='current'?'Nuvarande ekonomi':'Bostadsköp',
   housingType:selectedHousingType==='villa'?'Villa / Radhus':'Bostadsrätt',
-  currentHousing:num('currentHousing'),
-  currentHousingDrift:num('currentHousingDrift'),
   villaElectric:num('villaElectric'),
   villaWater:num('villaWater'),
   villaWaste:num('villaWaste'),
@@ -701,6 +700,11 @@ function download(){
  a.download=current.mode==='current'?'EkonomiIQ-rapport.xlsx':(current.housingType==='villa'?'BoendeIQ-villa-rapport.xlsx':'BoendeIQ-bostadsratt-rapport.xlsx');
  a.click();
  setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+
+ }catch(error){
+  console.error('Excel-exporten misslyckades',error);
+  alert('Excelrapporten kunde inte skapas. Försök igen eller ladda om sidan. Dina ifyllda uppgifter ligger kvar.');
+ }
 }
 document.querySelectorAll('.stepnav').forEach(n=>{n.addEventListener('click',()=>showStep(Number(n.dataset.nav)));n.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();showStep(Number(n.dataset.nav))}})});
 let analysisMode='purchase';
@@ -888,6 +892,9 @@ updateHouseholdPlaceholders();
 updateLive();
 
 function downloadPdfReport(){
+ const w=window.open('','_blank');
+ if(!w){alert('Tillåt popup-fönster för att skapa PDF-rapporten.');return}
+ try{
  const r=calc();
  const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
  const rows=(items)=>items.map(([label,value])=>`<tr><td>${esc(label)}</td><td>${esc(value)}</td></tr>`).join('');
@@ -969,9 +976,12 @@ r.mode==='current'
  <div class="note">PDF-rapporten bygger på uppgifterna i webbformuläret. Det löpande månadsresultatet använder ränta före ränteavdrag. Beräknat ränteavdrag redovisas separat som en möjlig skatteeffekt via deklarationen.</div>
  <footer>BoendeIQ är ett beslutsstöd och ersätter inte bankens kreditprövning eller personlig ekonomisk rådgivning.</footer>
  <script>window.onload=()=>setTimeout(()=>window.print(),250)<\/script></body></html>`;
- const w=window.open('','_blank');
- if(!w){alert('Tillåt popup-fönster för att skapa PDF-rapporten.');return}
- w.document.open();w.document.write(htmlReport);w.document.close();
+  w.document.open();w.document.write(htmlReport);w.document.close();
+ }catch(error){
+  console.error('PDF-exporten misslyckades',error);
+  try{w.close()}catch(closeError){}
+  alert('PDF-rapporten kunde inte skapas. Försök igen. Dina ifyllda uppgifter ligger kvar.');
+ }
 }
 
 $('download').onclick=download;$('downloadPdf').onclick=downloadPdfReport;$('downloadBottom').onclick=download;$('downloadPdfBottom').onclick=downloadPdfReport;document.querySelectorAll('.detailhead').forEach(btn=>btn.addEventListener('click',()=>{const card=btn.closest('.detail'),open=card.classList.toggle('open');btn.setAttribute('aria-expanded',String(open))}));let id='B'+Math.random().toString(36).slice(2,9).toUpperCase(),visits=1;try{const savedId=localStorage.getItem('boendeiqVisitor');if(savedId){id=savedId}else{localStorage.setItem('boendeiqVisitor',id)}visits=(Number(localStorage.getItem('boendeiqVisits'))||0)+1;localStorage.setItem('boendeiqVisits',String(visits))}catch(storageError){console.info('Besöksmätning är avstängd i detta webbläsarläge.')}if($('visitor')){$('visitor').textContent=`Testprofil ${id} · besök ${visits}`}syncDownPaymentFromPrice();updateLive();
