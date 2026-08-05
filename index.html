@@ -162,6 +162,11 @@
 .standard-note-row{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
 .standard-note-text{flex:1}.standard-reset{flex:0 0 auto;border:0;background:transparent;color:var(--brand);font-size:11px;font-weight:800;cursor:pointer;padding:0;text-decoration:underline;text-underline-offset:2px}
 .standard-reset.hidden{display:none}
+
+.export-status{display:none;margin-top:10px;padding:10px 12px;border-radius:10px;font-size:12px;font-weight:700}
+.export-status.error{display:block;background:#fff0f1;color:#a62f3b;border:1px solid #f5c2c7}
+.export-status.success{display:block;background:#eaf8f1;color:#146246;border:1px solid #b9e5d0}
+
 </style>
 </head>
 <body>
@@ -793,7 +798,18 @@ function tailorAboutXml(xml,mode,housingType){
  return xml;
 }
 
+
+function setExportStatus(message,type='error'){
+ let el=$('exportStatus');
+ if(!el){
+  el=document.createElement('div');el.id='exportStatus';el.className='export-status';
+  const target=$('download')?.parentElement||$('result')||document.body;
+  target.appendChild(el);
+ }
+ el.textContent=message;el.className='export-status '+type;
+}
 function download(){
+ setExportStatus('Skapar Excelrapport…','success');
  try{
  const current=calc(),key=normalizeMunicipality($('municipality').value);
  const municipality=key||$('municipality').value.trim()||'Riksgenomsnitt';
@@ -991,9 +1007,14 @@ function markFieldCustom(id){if(!isStandardControlled(id))return;standardFieldSt
 function resetFieldToStandard(id){standardFieldState[id]='auto';applyStandardValue(id,true);updateLive()}
 
 
-document.querySelectorAll('.next').forEach(b=>b.onclick=()=>showStep(Number(b.dataset.next)));document.querySelectorAll('.prev').forEach(b=>b.onclick=()=>showStep(Number(b.dataset.prev)));$('co').onchange=()=>{$('salary2Field').classList.toggle('hidden',$('co').value==='no');updateLive()};document.querySelectorAll('input,select').forEach(x=>x.addEventListener('input',updateLive));
+document.querySelectorAll('.next').forEach(b=>b.onclick=()=>showStep(Number(b.dataset.next)));document.querySelectorAll('.prev').forEach(b=>b.onclick=()=>showStep(Number(b.dataset.prev)));$('co').onchange=()=>{$('salary2Field').classList.toggle('hidden',$('co').value==='no');updateRequiredFields();updateHouseholdPlaceholders();refreshStandardControlledFields();updateLive()};document.querySelectorAll('input,select').forEach(x=>x.addEventListener('input',updateLive));
 STANDARD_CONTROLLED_IDS.forEach(id=>{const input=$(id);if(input)input.addEventListener('input',()=>markFieldCustom(id))});
-['salary1','salary2'].forEach(id=>{const input=$(id);if(input)input.addEventListener('input',()=>{refreshStandardControlledFields();updateLive()})});$('calcForm').addEventListener('submit',e=>{e.preventDefault();render()});
+['salary1','salary2'].forEach(id=>{const input=$(id);if(input)input.addEventListener('input',()=>{refreshStandardControlledFields();updateLive()})});
+['children','pets'].forEach(id=>{
+ const input=$(id);
+ if(input)input.addEventListener('input',()=>{updateHouseholdPlaceholders();refreshStandardControlledFields();updateLive()});
+});
+$('calcForm').addEventListener('submit',e=>{e.preventDefault();render()});
 function updateRequiredFields(){
  const hasCo=$('co').value==='yes';
  const field=$('salary2Field');
@@ -1015,13 +1036,26 @@ function householdAdults(){return $('co').value==='yes'?2:1}
 
 function ensureStandardNote(id){
  const input=$(id);if(!input)return null;
- let note=$(id+'StandardNote');if(note)return note;
+ let note=$(id+'StandardNote');
  const field=input.closest('.field');if(!field)return null;
- note=document.createElement('div');note.id=id+'StandardNote';note.className='standard-note';
- const row=document.createElement('div');row.className='standard-note-row';
- const text=document.createElement('span');text.id=id+'StandardText';text.className='standard-note-text';
- const reset=document.createElement('button');reset.type='button';reset.id=id+'StandardReset';reset.className='standard-reset hidden';reset.textContent='Återställ till schablon';reset.addEventListener('click',()=>resetFieldToStandard(id));
- row.appendChild(text);row.appendChild(reset);note.appendChild(row);field.appendChild(note);return note;
+ if(!note){
+  note=document.createElement('div');
+  note.id=id+'StandardNote';
+  note.className='standard-note';
+  field.appendChild(note);
+ }
+ let text=$(id+'StandardText');
+ let reset=$(id+'StandardReset');
+ if(!text||!reset){
+  note.innerHTML='';
+  const row=document.createElement('div');row.className='standard-note-row';
+  text=document.createElement('span');text.id=id+'StandardText';text.className='standard-note-text';
+  reset=document.createElement('button');reset.type='button';reset.id=id+'StandardReset';
+  reset.className='standard-reset hidden';reset.textContent='Återställ till schablon';
+  reset.addEventListener('click',()=>resetFieldToStandard(id));
+  row.appendChild(text);row.appendChild(reset);note.appendChild(row);
+ }
+ return note;
 }
 function updateHouseholdPlaceholders(){
  const adults=householdAdults(),children=Math.max(0,Math.floor(num('children'))),pets=Math.max(0,Math.floor(num('pets')));
