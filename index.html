@@ -467,13 +467,17 @@ function net(g,church=false){return Math.max(0,(Number(g)||0)-estimatedTax(g,chu
 
 const MONEY_INPUT_IDS=["salary1", "salary2", "price", "down", "fee", "drift", "villaElectric", "villaWater", "villaWaste", "villaBroadband", "villaInsurance", "propertyFee", "communityFee", "maintenance", "existingPantbrev", "inspectionCost", "currentRent", "currentRentalDrift", "currentCondoFee", "currentInterest", "currentAmortization", "currentCondoDrift", "currentVillaInterest", "currentVillaAmortization", "currentVillaElectric", "currentVillaWater", "currentVillaWaste", "currentVillaBroadband", "currentVillaInsurance", "currentPropertyFee", "currentCommunityFee", "currentMaintenance", "buffer", "loans", "food", "transport", "fixed", "unionFee", "gym", "medicine", "other", "tobacco", "preschool", "childActivities", "childOther", "petCost", "pensionSaving", "futureSaving", "experienceSaving"];
 function formatGroupedInteger(value){
- const number=Math.round(Math.max(0,parseNumberValue(value)));
- return number?new Intl.NumberFormat('sv-SE',{maximumFractionDigits:0}).format(number):'';
+ const raw=String(value??'').trim();
+ if(raw==='')return '';
+ const number=Math.round(Math.max(0,parseNumberValue(raw)));
+ return new Intl.NumberFormat('sv-SE',{maximumFractionDigits:0}).format(number);
 }
 function formatMoneyInputElement(input){
  if(!input)return;
- const hadValue=String(input.value).trim()!=='';
- input.value=hadValue?formatGroupedInteger(input.value):'';
+ const raw=String(input.value??'').trim();
+ if(raw===''){input.value='';return}
+ input.value=new Intl.NumberFormat('sv-SE',{maximumFractionDigits:0})
+  .format(Math.round(parseNumberValue(raw)));
 }
 function setMoneyInputValue(id,value){
  const input=$(id);if(!input)return;
@@ -486,8 +490,12 @@ function initializeMoneyInputs(){
   input.type='text';input.inputMode='numeric';input.dataset.money='true';
   formatMoneyInputElement(input);
   input.addEventListener('input',()=>{
-   const numeric=parseNumberValue(input.value);
-   input.value=numeric?new Intl.NumberFormat('sv-SE',{maximumFractionDigits:0}).format(Math.round(numeric)):'';
+   const raw=String(input.value??'');
+   const numeric=parseNumberValue(raw);
+   const hasDigits=/\d/.test(raw);
+   input.value=hasDigits
+    ?new Intl.NumberFormat('sv-SE',{maximumFractionDigits:0}).format(Math.round(numeric))
+    :'';
    try{input.setSelectionRange(input.value.length,input.value.length)}catch(_error){}
   });
   input.addEventListener('blur',()=>formatMoneyInputElement(input));
@@ -1081,7 +1089,7 @@ function updateRequiredFields(){
 
 let downPaymentIsAutomatic=true;
 function syncDownPaymentFromPrice(){
- const price=Math.max(0,Number($('price').value)||0);
+ const price=Math.max(0,parseNumberValue($('price').value));
  if(!downPaymentIsAutomatic)return;
  $('down').value=price>0?formatGroupedInteger(Math.round(price*0.10)):'';
  updateLive();
