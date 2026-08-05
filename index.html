@@ -854,6 +854,45 @@ function setExportStatus(message,type='error'){
  el.textContent=message;el.className='export-status '+type;
 }
 
+
+function setFormulaNumericCache(xml,cell,value){
+ const pattern=new RegExp('(<x:c\\b[^>]*\\br="'+cell+'"[^>]*>)(.*?)(</x:c>)','s');
+ return xml.replace(pattern,(whole,start,inner,end)=>{
+  if(!/<x:f>/.test(inner))return whole;
+  inner=inner.replace(/<x:v>.*?<\/x:v>/s,'');
+  return start+inner+'<x:v>'+String(Number(value)||0)+'</x:v>'+end;
+ });
+}
+function setFormulaStringCache(xml,cell,value){
+ const pattern=new RegExp('(<x:c\\b[^>]*\\br="'+cell+'"[^>]*)(>)(.*?)(</x:c>)','s');
+ return xml.replace(pattern,(whole,start,open,inner,end)=>{
+  if(!/<x:f>/.test(inner))return whole;
+  inner=inner.replace(/<x:v>.*?<\/x:v>/s,'');
+  start=start.replace(/\st="[^"]*"/,'')+' t="str"';
+  return start+open+inner+'<x:v>'+xmlEscape(String(value))+'</x:v>'+end;
+ });
+}
+function applyFinancialFormulaCaches(xml,sheetName,values,sheetPaths){
+ const debt=Number(values.exportedDebtRatio)||0;
+ const ltv=Number(values.exportedLtv)||0;
+ const loan=Number(values.exportedLoan)||0;
+ if(sheetName===sheetPaths['Motor']){
+  xml=setFormulaNumericCache(xml,'C11',loan);
+  xml=setFormulaNumericCache(xml,'C12',ltv);
+  xml=setFormulaNumericCache(xml,'C13',debt);
+ }
+ if(sheetName===sheetPaths['Kalkyl']){
+  xml=setFormulaNumericCache(xml,'E9',loan);
+  xml=setFormulaNumericCache(xml,'E10',ltv);
+  xml=setFormulaNumericCache(xml,'E11',debt);
+ }
+ if(sheetName===sheetPaths['Översikt']){
+  const displayedDebt=debt.toLocaleString('sv-SE',{minimumFractionDigits:2,maximumFractionDigits:2})+'×';
+  xml=setFormulaStringCache(xml,'I26',displayedDebt);
+  xml=setFormulaStringCache(xml,'B34',displayedDebt);
+ }
+ return xml;
+}
 function removeFormulaCaches(xml){
  // Excel formula cells can contain an old <v> result from the template.
  // Removing it forces Microsoft Excel to calculate from the exported inputs.
@@ -925,7 +964,10 @@ function download(){
   standardAutoChildActivities:standardFieldState.childActivities==='auto'?1:0,standardAutoChildOther:standardFieldState.childOther==='auto'?1:0,
   standardAutoPetCost:standardFieldState.petCost==='auto'?1:0,standardAutoTobacco:standardFieldState.tobacco==='auto'?1:0,
   standardAutoPensionSaving:standardFieldState.pensionSaving==='auto'?1:0,standardAutoFutureSaving:standardFieldState.futureSaving==='auto'?1:0,
-  standardAutoExperienceSaving:standardFieldState.experienceSaving==='auto'?1:0
+  standardAutoExperienceSaving:standardFieldState.experienceSaving==='auto'?1:0,
+  exportedLoan:current.loan,
+  exportedLtv:current.ltv,
+  exportedDebtRatio:current.debt
  };
  const textKeys=new Set(['municipality','church1','church2','analysisMode','housingType','currentHousingType']);
  const sourceParts={};
@@ -954,6 +996,7 @@ function download(){
    if(name===sheetPaths['Om BoendeIQ'])text=tailorAboutXml(text,current.mode,current.housingType);
    if(name===sheetPaths['Schabloner'])text=tailorStandardsXml(text,current.mode,current.housingType,current.currentHousingType);
    text=removeFormulaCaches(text);
+   text=applyFinancialFormulaCaches(text,name,values,sheetPaths);
    bytes=new TextEncoder().encode(text);
   }
   files[name]=bytes;
